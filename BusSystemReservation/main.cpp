@@ -2,7 +2,7 @@
 #include "BusSystem.h"
 
 /*
- * @file -> Main.cpp
+ * @file -> main.cpp
  * @autor -> Diego Alonso Narvaez Zapata
  * @date -> 26/09/2021
  */
