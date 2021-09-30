@@ -17,3 +17,5 @@ Este proyecto esta pensado para principiantes, haciendo un programa para reserva
 
 
 ![Autobus](https://periodicoviaje.com/wp-content/uploads/2021/06/checkmybus-autobus.jpg)
+
+# English documentation
