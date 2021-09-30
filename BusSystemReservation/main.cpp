@@ -13,8 +13,6 @@ void MainPage();
 
 int main() {
 	MainPage();
-
-	std::cin.get();
 	return 0;
 }
 
@@ -22,9 +20,7 @@ int main() {
 void MainPage() {
 	int opcion;
 
-	gotoxy(53, 0);
-	std::cout << "Bienvenido" << '\n';
-
+	CentrarTexto("Bienvenido", 1);
 	do {
 		std::cout << "\nOpciones" << '\n';
 		std::cout << "1. Pedir Autobus" << '\n';
