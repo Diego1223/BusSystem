@@ -8,7 +8,7 @@ Este proyecto esta pensado para principiantes, haciendo un programa para reserva
 * Manejo de handles
 * Uso y creacion de la funcion gotoxy
 * Uso de header files
-
+* Manejo de archivos 
 ## Desarrolladores
 1. *Diego Alonso Narvaez Zapata*
 
