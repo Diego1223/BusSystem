@@ -41,7 +41,6 @@ public:
 
 
 //----- Declaracion de los atributos ------
-
 struct Bus::DatosPedido {
 	int capacidad;
 	char fecha[10];
