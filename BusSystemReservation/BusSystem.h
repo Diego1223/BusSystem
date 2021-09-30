@@ -36,12 +36,14 @@ public:
 	void MainPage();
 	void PedirBus();
 	void DatosNec(int opcion);
+	void PedirDatos();
 };
 
 
 
 //----- Declaracion de los atributos ------
 struct Bus::DatosPedido {
+	//Se le va a poner el maximo de personas que caben en la opcion que hayan elegido
 	int capacidad;
 	char fecha[10];
 }datosPedido;
@@ -50,6 +52,8 @@ struct Bus::DatosPersona {
 	char nombre[60];
 	char tarjetaCredito[20];
 }datosPersona;
+
+
 
 void Bus::MainPage() {
 	//Esta funcion cambia el titulo de la consola
@@ -81,13 +85,61 @@ void Bus::MainPage() {
 	}
 }
 
+void Bus::PedirDatos() {
+	SetConsoleTitle(L"Datos");
+	int contador;
+
+	/*
+	 * Vaciar el buffer
+	 * Ponemos 256 por que es con el numero que se llena el buffer
+	 * Podriamos poner solo: std::cin.ignore();
+	 */
+	std::cin.ignore(256, '\n');
+	datosPedido.capacidad = 25;
+
+	//Seguir con la confirmar datos (No va a ser una nueva pantalla)
+	CentrarTexto("Datos", 12);
+	std::cout << "\nPor favor, ingrese los siguientes datos\n";
+
+	std::cout << "Nombre completo por apellidos => ";
+	std::cin.getline(datosPersona.nombre, 60, '\n');
+
+	std::cout << "Tarjeta de credito => ";
+	std::cin.getline(datosPersona.tarjetaCredito, 20, '\n');
+
+	std::cout << "Ingrese la fecha (dia/mes/anio) => ";
+	std::cin.getline(datosPedido.fecha, 10, '\n');
+
+	std::cout << '\n';
+
+	//Simular pantall de espera
+	contador = 0;
+	while (contador < 3) {
+		std::cout << "Please wait. /";
+		Sleep(500);
+		system("cls");
+
+		std::cout << "Please wait.. |";
+		Sleep(500);
+		system("cls");
+
+		std::cout << "Please wait... \\";
+		Sleep(500);
+		system("cls");
+
+		contador++;
+	}
+
+}
+
+
 void Bus::DatosNec(int opcion) {
 	if (opcion == 1) {
 		int Tiemporenta;
 		float Minicial = 5000; //MontoInicial
 		float Vfinal = 0; //Valor final
 		char confirmar;
-
+		
 		system("cls");
 		//Titulo
 		CentrarTexto("Ingresar mas datos necesarios", 1);
@@ -114,18 +166,7 @@ void Bus::DatosNec(int opcion) {
 		std::cin >> confirmar;
 
 		if ((confirmar == 'Y') || (confirmar == 'y')) {
-			std::cin.ignore(256, '\n');
-			//Seguir con la confirmar datos (No va a ser una nueva pantalla)
-			CentrarTexto("Datos", 12);
-
-			std::cout << "\nPor favor, ingrese los siguientes datos\n";
-
-			std::cout << "Nombre completo por apellidos => ";
-			std::cin.getline(datosPersona.nombre, 60, '\n');
-
-			std::cout << "Tarjeta de credito => ";
-			std::cin.getline(datosPersona.tarjetaCredito, 20, '\n');
-
+			PedirDatos();
 		}
 		else {
 			MainPage();
