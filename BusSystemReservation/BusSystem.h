@@ -33,6 +33,7 @@ public:
 	struct DatosPedido;
 	struct DatosPersona;
 	
+	void MainPage();
 	void PedirBus();
 	void DatosNec(int opcion);
 };
@@ -42,23 +43,51 @@ public:
 //----- Declaracion de los atributos ------
 
 struct Bus::DatosPedido {
-	char nombre[50];
-	char direccionFisica[50];
-	char direccionIP[50];
+	int capacidad;
+	char fecha[10];
 }datosPedido;
 
 struct Bus::DatosPersona {
-	int capacidad;
-	char fecha[10];
+	char nombre[60];
+	char tarjetaCredito[20];
 }datosPersona;
 
+void Bus::MainPage() {
+	//Esta funcion cambia el titulo de la consola
+	SetConsoleTitle(L"Main Page");
 
+	int opcion;	
+
+	system("cls");
+	CentrarTexto("Bienvenido", 1);
+	
+	do {
+		std::cout << "\nOpciones" << '\n';
+		std::cout << "1. Pedir Autobus" << '\n';
+		std::cout << "2. Hacer reporte" << '\n';
+		std::cout << "3. Solicitar trabajo" << '\n';
+		std::cout << "=> "; std::cin >> opcion;
+
+		if ((opcion > 3) || (opcion < 1)) {
+			std::cout << "\a";
+			std::cout << "\nLa opcion que ingreso no existe. Vuelve a intentarlo" << '\n';
+		}
+	} while ((opcion > 3) || (opcion < 1));
+
+	switch (opcion) {
+	case 1:
+		Bus pedirBus;
+		pedirBus.PedirBus();
+		break;
+	}
+}
 
 void Bus::DatosNec(int opcion) {
 	if (opcion == 1) {
 		int Tiemporenta;
 		float Minicial = 5000; //MontoInicial
 		float Vfinal = 0; //Valor final
+		char confirmar;
 
 		system("cls");
 		//Titulo
@@ -80,11 +109,28 @@ void Bus::DatosNec(int opcion) {
 		else {
 			Vfinal = Minicial;
 		}
-		
-		//Seguir con la confirmar datos (No va a ser una nueva pantalla)
-		CentrarTexto("Confirmar datos", 9);
-	
 
+		std::cout << "\nCoticacion => " << Vfinal << '\n';
+		std::cout << "\nContinuar Y/n >> ";
+		std::cin >> confirmar;
+
+		if ((confirmar == 'Y') || (confirmar == 'y')) {
+			std::cin.ignore(256, '\n');
+			//Seguir con la confirmar datos (No va a ser una nueva pantalla)
+			CentrarTexto("Datos", 12);
+
+			std::cout << "\nPor favor, ingrese los siguientes datos\n";
+
+			std::cout << "Nombre completo por apellidos => ";
+			std::cin.getline(datosPersona.nombre, 60, '\n');
+
+			std::cout << "Tarjeta de credito => ";
+			std::cin.getline(datosPersona.tarjetaCredito, 20, '\n');
+
+		}
+		else {
+			MainPage();
+		}
 		system("pause>0");
 	}
 }
@@ -93,6 +139,8 @@ void Bus::DatosNec(int opcion) {
 
 void Bus::PedirBus() {
 	system("cls");
+	SetConsoleTitle(L"Ofertas");
+
 	std::string ofertas, of1;
 	int opcion = 0;
 
