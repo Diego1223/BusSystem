@@ -13,7 +13,7 @@ void gotoxy(int x, int y) {
 }
 
 void CentrarTexto(const char* texto, int y) {
-	int size;
+	float size;
 	size = strlen(texto);
 	//El ancho de la consola es 119
 	//Pero como lo estamos centrando, lo tenemos que poner en la mitad que es 59.5 (peude variar entre computadoras)

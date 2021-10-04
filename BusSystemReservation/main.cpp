@@ -8,7 +8,6 @@
  * @date -> 26/09/2021
  */
 
-
 int main( void ) {
 	//Esta funcion cambia el titulo de la consola
 	SetConsoleTitle(L"Bus System Reservation");

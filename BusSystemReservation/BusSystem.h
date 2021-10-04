@@ -34,9 +34,10 @@ public:
 	struct DatosPersona;
 	
 	void MainPage();
-	void PedirBus();
+	void Reservar();
 	void DatosNec(int opcion);
 	void PedirDatos();
+	void Gdatos(); //Guardar datos
 };
 
 
@@ -80,8 +81,84 @@ void Bus::MainPage() {
 	switch (opcion) {
 	case 1:
 		Bus pedirBus;
-		pedirBus.PedirBus();
+		pedirBus.Reservar();
 		break;
+	}
+}
+
+
+void Bus::Reservar() {
+	system("cls");
+	SetConsoleTitle(L"Ofertas");
+
+	std::string ofertas, of1;
+	int opcion = 0;
+
+	//--- Titulo ---
+	SetColorText(4, "");
+	CentrarTexto("OFERTAS DISPONIBLES", 1);
+
+	std::cout << '\n';
+
+	//Ofertas disponibles
+	gotoxy(14, 5);
+	of1 = "1. Autobus con capacidad de 15 - 25 personas";
+	SetColorText(7, of1);
+
+	std::cout << '\t';
+	std::cout << "2. Autobus con capacidad de 30 - 40 personas";
+
+	gotoxy(39, 8);
+	std::cout << "3. Autobus con capacidad de 50 - 60 personas";
+
+	//---- Escojer la respuesta correcta
+	SetColorText(1, "");
+	CentrarTexto("Ingresa el numero de la oferta >> ", 25);
+	std::cin >> opcion;
+	DatosNec(opcion);
+}
+
+
+
+void Bus::DatosNec(int opcion) {
+	if (opcion == 1) {
+		int Tiemporenta;
+		float Minicial = 5000; //MontoInicial
+		float Vfinal = 0; //Valor final
+		char confirmar;
+
+		system("cls");
+		//Titulo
+		CentrarTexto("Ingresar mas datos necesarios", 1);
+
+		//Para poder cambiar el color del texto
+		SetColorText(7, "");
+
+		std::cout << "\nMonto Inicial => " << Minicial << " (Incluye una hora)\n";
+
+		std::cout << "\nCada hora vale 2,000 pesos (varia entre la capacidad de los camiones)" << '\n';
+		std::cout << "Ingrese el Tiempo de renta (Si no desea agregar mas horas, digite 0) >> ";
+		std::cin >> Tiemporenta;
+
+		if (Tiemporenta > 0) {
+			Tiemporenta *= 2000;
+			Vfinal = Minicial + Tiemporenta;
+		}
+		else {
+			Vfinal = Minicial;
+		}
+
+		std::cout << "\nCoticacion => " << Vfinal << '\n';
+		std::cout << "\nContinuar Y/n >> ";
+		std::cin >> confirmar;
+
+		if ((confirmar == 'Y') || (confirmar == 'y')) {
+			PedirDatos();
+		}
+		else {
+			MainPage();
+		}
+		system("pause>0");
 	}
 }
 
@@ -129,81 +206,5 @@ void Bus::PedirDatos() {
 
 		contador++;
 	}
-
-}
-
-
-void Bus::DatosNec(int opcion) {
-	if (opcion == 1) {
-		int Tiemporenta;
-		float Minicial = 5000; //MontoInicial
-		float Vfinal = 0; //Valor final
-		char confirmar;
-		
-		system("cls");
-		//Titulo
-		CentrarTexto("Ingresar mas datos necesarios", 1);
-
-		//Para poder cambiar el color del texto
-		SetColorText(7, "");
-		
-		std::cout << "\nMonto Inicial => " << Minicial << " (Incluye una hora)\n";
-
-		std::cout << "\nCada hora vale 2,000 pesos (varia entre la capacidad de los camiones)" << '\n';
-		std::cout << "Ingrese el Tiempo de renta (Si no desea agregar mas horas, digite 0) >> ";
-		std::cin >> Tiemporenta;
-
-		if (Tiemporenta > 0) {
-			Tiemporenta *= 2000;
-			Vfinal = Minicial + Tiemporenta;
-		}
-		else {
-			Vfinal = Minicial;
-		}
-
-		std::cout << "\nCoticacion => " << Vfinal << '\n';
-		std::cout << "\nContinuar Y/n >> ";
-		std::cin >> confirmar;
-
-		if ((confirmar == 'Y') || (confirmar == 'y')) {
-			PedirDatos();
-		}
-		else {
-			MainPage();
-		}
-		system("pause>0");
-	}
-}
-
-
-
-void Bus::PedirBus() {
-	system("cls");
-	SetConsoleTitle(L"Ofertas");
-
-	std::string ofertas, of1;
-	int opcion = 0;
-
-	//--- Titulo ---
-	SetColorText(4, "");
-	CentrarTexto("OFERTAS DISPONIBLES", 1);
-
-	std::cout << '\n';
-
-	//Ofertas disponibles
-	gotoxy(14, 5);
-	of1 = "1. Autobus con capacidad de 15 - 25 personas";
-	SetColorText(7, of1);
-
-	std::cout << '\t';
-	std::cout << "2. Autobus con capacidad de 30 - 40 personas";
-
-	gotoxy(39, 8);
-	std::cout << "3. Autobus con capacidad de 50 - 60 personas";
-
-	//---- Escojer la respuesta correcta
-	SetColorText(1, "");
-	CentrarTexto("Ingresa el numero de la oferta >> ", 25);
-	std::cin >> opcion;
-	DatosNec(opcion);
+	std::cout << "Datos guardados!";
 }
